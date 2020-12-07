@@ -3,7 +3,7 @@ interface IProps {
     initConfig?: AxiosRequestConfig;
     beforeRequset?: (url: string) => void;
     reqIntercept?: (config: AxiosRequestConfig) => AxiosRequestConfig;
-    resIntercept?: (response: AxiosResponse) => void;
+    resIntercept?: (response: AxiosResponse) => any;
     resErrorCallback?: (err: AxiosError) => void;
 }
 export declare class Axios {

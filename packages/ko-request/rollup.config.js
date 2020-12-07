@@ -27,5 +27,5 @@ export default {
 		})
 	],
 	 // 指出应将哪些模块视为外部模块
-	external: ['whatwg-fetch', 'axios']
+	external: ['whatwg-fetch', 'axios', 'qs']
 }
