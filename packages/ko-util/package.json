@@ -1,6 +1,6 @@
 {
   "name": "ko-util",
-  "version": "1.11.5",
+  "version": "1.11.6-alpha.0",
   "description": "袋鼠工具库",
   "scripts": {
     "build": "rollup -c && npm run build:lib",
