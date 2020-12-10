@@ -106,6 +106,14 @@ class Axios {
     }
 }
 
+var ResponseTypeEnum;
+(function (ResponseTypeEnum) {
+    ResponseTypeEnum["arrayBuffer"] = "arrayBuffer";
+    ResponseTypeEnum["blob"] = "blob";
+    ResponseTypeEnum["json"] = "json";
+    ResponseTypeEnum["text"] = "text";
+    ResponseTypeEnum["formData"] = "formData";
+})(ResponseTypeEnum || (ResponseTypeEnum = {}));
 class Fetch {
     constructor(props = {}) {
         this.initConfig = props.initConfig || {};
@@ -113,17 +121,14 @@ class Fetch {
             return config;
         };
         this.resIntercept = props.resIntercept || function (res, config) {
-            if (config.responseType === 'arraybuffer') {
-                return res.blob();
-            }
-            return res.json();
+            return res[config.responseType || 'json']();
         };
         this.resErrorCallback = props.resErrorCallback || function () { };
     }
     request(url, options) {
         // 合并初始化config
-        const config = Object.assign(this.initConfig, options);
-        return fetch((options.baseURL || '') + url, this.reqIntercept(config))
+        const config = Object.assign({}, this.initConfig, options);
+        return fetch((config.baseURL || '') + url, this.reqIntercept(config))
             .then(res => this.resIntercept(res, config))
             .catch(err => {
             this.resErrorCallback(err);

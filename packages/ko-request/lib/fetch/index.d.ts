@@ -1,13 +1,20 @@
 import 'whatwg-fetch';
 interface FetchConfig extends RequestInit {
     baseURL?: string;
-    responseType?: string;
+    responseType?: ResponseTypeEnum;
 }
 interface IProps {
     initConfig?: Partial<FetchConfig>;
     reqIntercept?: (config: FetchConfig) => FetchConfig;
     resIntercept?: (response: Response) => Promise<any>;
     resErrorCallback?: (err: any) => void;
+}
+declare enum ResponseTypeEnum {
+    arrayBuffer = "arrayBuffer",
+    blob = "blob",
+    json = "json",
+    text = "text",
+    formData = "formData"
 }
 export declare class Fetch {
     initConfig: Partial<FetchConfig>;
