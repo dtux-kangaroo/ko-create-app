@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 
 interface FetchConfig extends RequestInit {
 	baseURL?: string;
-	responseType?: ResponseTypeEnum;
+	responseType?: ResponseType;
 }
 
 interface IProps {
@@ -12,13 +12,7 @@ interface IProps {
 	resErrorCallback?: (err) => void
 }
 
-enum ResponseTypeEnum {
-	arrayBuffer = 'arrayBuffer',
-	blob = 'blob',
-	json = 'json',
-	text = 'text',
-	formData = 'formData'
-}
+type ResponseType = 'arrayBuffer' | 'blob' | 'json' | 'text' | 'formData'
 
 export class Fetch {
 	initConfig: Partial<FetchConfig>;

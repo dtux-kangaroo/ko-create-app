@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 interface FetchConfig extends RequestInit {
     baseURL?: string;
-    responseType?: string;
+    responseType?: ResponseType;
 }
 interface IProps {
     initConfig?: Partial<FetchConfig>;
@@ -9,6 +9,7 @@ interface IProps {
     resIntercept?: (response: Response) => Promise<any>;
     resErrorCallback?: (err: any) => void;
 }
+declare type ResponseType = 'arrayBuffer' | 'blob' | 'json' | 'text' | 'formData';
 export declare class Fetch {
     initConfig: Partial<FetchConfig>;
     reqIntercept: (config: FetchConfig) => FetchConfig;

@@ -6,7 +6,7 @@
 	"main": "lib/index.js",
 	"module": "lib/index.js",
 	"scripts": {
-		"build": "rollup -c && npm run build:lib",
+		"build": "rollup -c & npm run build:lib",
 		"build:lib": "rollup -c rollup.config.lib.js",
 		"dev": "rollup -c -w"
 	},
