@@ -8,6 +8,7 @@
 	"scripts": {
 		"build": "rollup -c && npm run build:lib",
 		"build:lib": "rollup -c rollup.config.lib.js",
+		"publish": "npm run build && npm run build:lib",
 		"dev": "rollup -c -w"
 	},
 	"keywords": [
