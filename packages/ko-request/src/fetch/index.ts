@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 
 interface FetchConfig extends RequestInit {
 	baseURL?: string;
-	responseType?: string;
+	responseType?: ResponseTypeEnum;
 }
 
 interface IProps {
@@ -10,6 +10,14 @@ interface IProps {
 	reqIntercept?: (config: FetchConfig) => FetchConfig;
 	resIntercept?: (response: Response) => Promise<any>;
 	resErrorCallback?: (err) => void
+}
+
+enum ResponseTypeEnum {
+	arrayBuffer = 'arrayBuffer',
+	blob = 'blob',
+	json = 'json',
+	text = 'text',
+	formData = 'formData'
 }
 
 export class Fetch {
@@ -24,19 +32,16 @@ export class Fetch {
 			return config
 		};
 		this.resIntercept = props.resIntercept || function(res, config) {
-			if(config.responseType === 'arraybuffer') {
-				return res.blob()
-			}
-			return res.json()
+			return res[config.responseType || 'json']()
 		}
 		this.resErrorCallback = props.resErrorCallback || function () {}
 	}
 
 	request(url: string, options: FetchConfig) {
 		// 合并初始化config
-		const config = Object.assign(this.initConfig, options)
+		const config = Object.assign({}, this.initConfig, options)
 
-		return fetch((options.baseURL || '') + url, this.reqIntercept(config))
+		return fetch((config.baseURL || '') + url, this.reqIntercept(config))
 			.then(res => this.resIntercept(res, config))
 			.catch(err => {
 				this.resErrorCallback(err);
