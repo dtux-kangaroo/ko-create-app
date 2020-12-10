@@ -1,9 +1,9 @@
 import path from 'path';
 import json from '@rollup/plugin-json'
-import babel from 'rollup-plugin-babel'; //便于他们可以使用未被浏览器和 Node.js 支持的将来版本的 JavaScript 特性。
+import babel from '@rollup/plugin-babel'; //便于他们可以使用未被浏览器和 Node.js 支持的将来版本的 JavaScript 特性。
 import commonjs from '@rollup/plugin-commonjs'; //用来将 CommonJS 转换成 ES2015 模块的。
 import replace from '@rollup/plugin-replace'; //
-import resolve from 'rollup-plugin-node-resolve'; //告诉 Rollup 如何查找外部模块
+import resolve from '@rollup/plugin-node-resolve'; //告诉 Rollup 如何查找外部模块
 import ts from 'rollup-plugin-typescript2'; 
 
 export default {
