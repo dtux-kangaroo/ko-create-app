@@ -31,7 +31,7 @@ module.exports = function(s) {
   const userConfig = getUserConf();
   const { dll = [], babel = {} } = userConfig;
   let splicModules = dll.length ? dll : dependencies;
-  const babelConf = require('@kodesign/ko-babel-app')(babel.plugins, babel.targets);
+  const babelConf = require('ko-babel-app')(babel.plugins, babel.targets);
   return {
     mode: 'production',
     entry: formatBundle(splicModules, s),
