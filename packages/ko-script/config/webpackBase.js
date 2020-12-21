@@ -19,6 +19,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TS_LOADER = require.resolve('ts-loader');
 const { createHappyPlugin } = require('../util/createHappyPlugin');
 const HAPPY_PACK = require.resolve('happypack/loader');
+const getUserConf = require('./getUserConf');
 
 /**
  * 合并 plugin 操作，
@@ -43,7 +44,7 @@ const ENV_PROD = 'production';
 const ENV_DEV = 'development';
 
 module.exports = function getWebpackBase(program) {
-  const isDllDisabled = program.disableDll;
+  const enableMicro = program.micro;
   const result = getEntry(program);
   const tsRule = [
     {
@@ -79,8 +80,9 @@ module.exports = function getWebpackBase(program) {
     context: paths.appDirectory,
     output: {
       path: paths.appDist,
-      filename: 'js/[name].[contenthash:6].js',
+      filename: enableMicro ? 'js/[name].js' : 'js/[name].[contenthash:6].js',
       publicPath: '/',
+      libraryTarget: enableMicro ? 'system' : 'umd',
     },
     resolve: {
       modules: [paths.appModules, 'node_modules'],
@@ -116,12 +118,13 @@ module.exports = function getWebpackBase(program) {
       hints: false, // 关闭性能提示
     },
     plugins: program.ts
-      ? getPlugins(result.entry, isDllDisabled).concat(tsPlugin)
-      : getPlugins(result.entry, isDllDisabled),
+      ? getPlugins(result.entry, enableMicro).concat(tsPlugin)
+      : getPlugins(result.entry, enableMicro),
     optimization: {},
-    node: false
+    node: false,
   };
 
+  //TODO: 用户自定义的plugins覆盖相应的default配置
   const finalWebpackConfig = mergeWithCustomize({
     customizeArray: pluginsUnique(['HtmlWebpackPlugin']),
   })(webpackConfig, result.webpack);

@@ -101,8 +101,10 @@ module.exports = () => {
         {
           loader: LESS_LOADER,
           options: {
+            lessOptions: {
+              javascriptEnabled: true,
+            },
             sourceMap: true,
-            javascriptEnabled: true,
           },
         },
       ],
@@ -115,10 +117,10 @@ module.exports = () => {
         id: 'happy-babel-js',
       },
     },
-    {
-      test: /\.vue$/,
-      loader: VUE_LOADER,
-    },
+    // {
+    //   test: /\.vue$/,
+    //   loader: VUE_LOADER,
+    // },
     {
       test: /\.(woff|woff2|svg|ttf|eot)$/,
       loader: FILE_LOADER,

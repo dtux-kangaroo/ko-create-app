@@ -31,8 +31,6 @@
  lodash                               ^4.17.15  →  ^4.17.20     
  mini-css-extract-plugin                ^0.9.0  →    ^1.3.3     
  mustache                               ^3.2.1  →    ^4.1.0     
- node-sass                             ^4.13.0  →    ^5.0.0     
- optimize-css-assets-webpack-plugin     ^5.0.3  →    ^5.0.4     
  ora                                    ^4.0.3  →    ^5.1.0     
  postcss-loader                         ^3.0.0  →    ^4.1.0     
  react-dev-utils                        ^9.0.3  →   ^11.0.1     
@@ -69,13 +67,8 @@
 TODO
 | 包名称  | 替换原因  |
 |---|---|
-| awesome-typescript-loader  |  无引用 |
-|  babel-plugin-import | 无引用  |
-|  friendly-errors-webpack-plugin |  无引用 |
-| moment  | deprecated,只有一处用到,改为Date方式实现  |
-|  request |  deprecated,改为其他方式实现 |
-| request-progress  | deprecated,改为其他方式实现  |
-|  request-promise | deprecated,改为其他方式实现  |
+|  optimize-css-assets-webpack-plugin |  css-minimizer-webpack-plugin |
+|  node-sass  | sass  |
 
 ### 新增功能
 

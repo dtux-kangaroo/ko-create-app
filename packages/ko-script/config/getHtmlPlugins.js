@@ -12,12 +12,14 @@ const paths = require('./defaultPaths');
 const { getConfJsPath, getDllJsPath } = require('./getScriptPaths');
 const verifyHtml = require('../util/verifyHtml');
 
-module.exports = function getHtmlPlugins(entries, isDllDisabled) {
+module.exports = function getHtmlPlugins(entries, enableMicro) {
   //验证模板文件
-  verifyHtml(paths.appHtml);
+  if (!enableMicro) {
+    verifyHtml(paths.appHtml);
+  }
   const config = getConfJsPath();
   let scripts = {};
-  if (!isDllDisabled) {
+  if (!enableMicro) {
     scripts = getDllJsPath();
   }
   return [

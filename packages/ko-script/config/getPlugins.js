@@ -14,21 +14,18 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const getHtmlPlugins = require('./getHtmlPlugins');
 const getDllPlugins = require('./getDllPlugins');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const paths = require('./defaultPaths');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const getTopBanner = require('./getTopBanner');
 const webpack = require('webpack');
 const getRulesHappy = require('./getRulesHappy');
-let cleanPath = ['dist'];
-let cleanOpt = {
-  root: paths.appDirectory,
-  verbose: false,
-  dry: false,
-};
-module.exports = (entry, isDllDisabled) => {
-  const plugins = [
-    new VueLoaderPlugin(),
+const getUserConf = require('./getUserConf');
+
+module.exports = (entry, enableMicro) => {
+  const userDefinedWebpackConf = getUserConf().webpack;
+  const userDefinedPlugins = userDefinedWebpackConf.plugins || [];
+  let plugins = [
+    // new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash:6].css',
       chunkFilename: 'css/[id].[hash:6].css',
@@ -44,15 +41,21 @@ module.exports = (entry, isDllDisabled) => {
       _: 'lodash',
     }),
   ];
+  plugins = plugins.concat(userDefinedPlugins);
   if (process.env.NODE_ENV == 'production') {
-    plugins.push(new CleanWebpackPlugin(cleanPath, cleanOpt));
+    plugins.push(
+      new CleanWebpackPlugin({
+        verbose: false,
+        dry: false,
+      })
+    );
   }
-  if (!isDllDisabled) {
+  if (!enableMicro) {
     //引入 dll 文件
     Array.prototype.push.apply(plugins, getDllPlugins());
   }
   // 增加 html 输出，支持多页面应用
-  Array.prototype.push.apply(plugins, getHtmlPlugins(entry, isDllDisabled));
+  Array.prototype.push.apply(plugins, getHtmlPlugins(entry, enableMicro));
   //加载happypackplugin
   Array.prototype.push.apply(plugins, getRulesHappy());
   return plugins;
