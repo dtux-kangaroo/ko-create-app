@@ -7,13 +7,23 @@ class Axios {
         // this.beforeRequset = props.beforeRequset || function(){}
         this.reqIntercept = props.reqIntercept || function (config) { return config; };
         this.resIntercept = props.resIntercept || function (response) {
+            const config = response.config;
             switch (response.status) {
                 case 200:
+                    if (config.responseType === 'blob' || config.responseType === 'arraybuffer') {
+                        const responseHeaders = response.headers, contentType = responseHeaders['content-type'], contentDisposition = responseHeaders['content-disposition'], fileName = getFileName(contentDisposition);
+                        return {
+                            data: response.data,
+                            contentType,
+                            fileName
+                        };
+                    }
                     return response.data;
                 case 301:
                     return;
                 default:
-                    return Promise.reject('error');
+                    this.resErrorCallback(response);
+                    return Promise.reject(response);
             }
         };
         this.resErrorCallback = props.resErrorCallback || function () { };
@@ -32,7 +42,6 @@ class Axios {
             // todo: 想根据业务需要，对响应结果预先处理的，都放在这里
             return this.resIntercept(response);
         }, (err) => {
-            console.log("response err", err);
             if (err.request) { // 请求超时处理
                 if (err.request.readyState === 4 && err.request.status === 0) {
                     // 当一个请求在上面的timeout属性中设置的时间内没有完成，则触发超时错误
@@ -103,6 +112,20 @@ class Axios {
         };
         return this.request(url, options);
     }
+}
+function getFileName(str) {
+    const strList = str && str.split(';') || [];
+    let ret = '';
+    strList.forEach(item => {
+        if (item.indexOf('filename') >= 0) {
+            const itemStr = item.split('=');
+            ret = itemStr[1];
+        }
+    });
+    if (!ret) {
+        return Math.random().toString(36).slice(2);
+    }
+    return decodeURIComponent(ret);
 }
 
 export { Axios };

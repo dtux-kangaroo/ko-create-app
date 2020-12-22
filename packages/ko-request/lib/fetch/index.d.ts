@@ -6,7 +6,7 @@ interface FetchConfig extends RequestInit {
 interface IProps {
     initConfig?: Partial<FetchConfig>;
     reqIntercept?: (config: FetchConfig) => FetchConfig;
-    resIntercept?: (response: Response) => Promise<any>;
+    resIntercept?: (response: Response, config?: FetchConfig) => Promise<any>;
     resErrorCallback?: (err: any) => void;
 }
 declare type ResponseType = 'arrayBuffer' | 'blob' | 'json' | 'text' | 'formData';
@@ -22,7 +22,7 @@ export declare class Fetch {
     delete(url: string, params?: object, conifg?: FetchConfig): Promise<any>;
     put(url: string, data?: {}, config?: FetchConfig): Promise<any>;
     postForm(url: string, data: any, flag?: boolean, config?: FetchConfig): Promise<any>;
-    queryString(url: string, params: any): string;
-    buildFormData(params: any): FormData;
+    private queryString;
+    private buildFormData;
 }
 export {};

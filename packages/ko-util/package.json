@@ -10,7 +10,8 @@
   "homepage": "",
   "author": "dtux",
   "main": "lib/index.js",
-  "module": "es/index.js",
+  "module": "lib/index.js",
+  "files": ["lib"],
   "license": "ISC",
   "publishConfig": {
     "access": "public",

@@ -6,7 +6,17 @@ class Fetch {
         this.reqIntercept = props.reqIntercept || function (config) {
             return config;
         };
-        this.resIntercept = props.resIntercept || function (res, config) {
+        this.resIntercept = props.resIntercept || async function (res, config) {
+            !res.ok && this.resErrorCallback(res);
+            if (config.responseType === 'blob' || config.responseType === 'arrayBuffer') {
+                const responseHeaders = res.headers, contentType = responseHeaders.get('content-type'), contentDisposition = responseHeaders.get('content-disposition'), fileName = getFileName(contentDisposition);
+                const data = await res[config.responseType]();
+                return {
+                    data,
+                    contentType,
+                    fileName
+                };
+            }
             return res[config.responseType || 'json']();
         };
         this.resErrorCallback = props.resErrorCallback || function () { };
@@ -92,6 +102,20 @@ class Fetch {
             return data;
         }
     }
+}
+function getFileName(str) {
+    const strList = str && str.split(';') || [];
+    let ret = '';
+    strList.forEach(item => {
+        if (item.indexOf('filename') >= 0) {
+            const itemStr = item.split('=');
+            ret = itemStr[1];
+        }
+    });
+    if (!ret) {
+        return Math.random().toString(36).slice(2);
+    }
+    return decodeURIComponent(ret);
 }
 
 export { Fetch };

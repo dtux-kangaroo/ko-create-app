@@ -8,7 +8,7 @@ interface FetchConfig extends RequestInit {
 interface IProps {
 	initConfig?: Partial<FetchConfig>;
 	reqIntercept?: (config: FetchConfig) => FetchConfig;
-	resIntercept?: (response: Response) => Promise<any>;
+	resIntercept?: (response: Response, config?: FetchConfig) => Promise<any>;
 	resErrorCallback?: (err) => void
 }
 
@@ -25,7 +25,22 @@ export class Fetch {
 		this.reqIntercept = props.reqIntercept || function(config: FetchConfig) {
 			return config
 		};
-		this.resIntercept = props.resIntercept || function(res, config) {
+		this.resIntercept = props.resIntercept || async function(res, config) {
+			!res.ok && this.resErrorCallback(res);
+			if(config.responseType === 'blob' || config.responseType === 'arrayBuffer') {
+				const responseHeaders = res.headers,
+					contentType = responseHeaders.get('content-type'),
+					contentDisposition = responseHeaders.get('content-disposition'),
+  					fileName = getFileName(contentDisposition);
+				
+				const data = await res[config.responseType]()
+				return {
+					data,
+					contentType,
+					fileName
+				}
+			}
+
 			return res[config.responseType || 'json']()
 		}
 		this.resErrorCallback = props.resErrorCallback || function () {}
@@ -94,7 +109,7 @@ export class Fetch {
 		return this.request(url, options)
 	}
 
-	queryString(url: string, params) {
+	private queryString(url: string, params) {
 		const ps = []
 		if (typeof params === 'object') {
 			for (let p in params) {
@@ -108,7 +123,7 @@ export class Fetch {
 		}
 	}
 
-	buildFormData(params) {
+	private buildFormData(params) {
 		if (params) {
 			const data = new FormData()
 			for (let p in params) {
@@ -119,4 +134,19 @@ export class Fetch {
 			return data;
 		}
 	}
+}
+
+function getFileName(str: string): string {
+	const strList = str && str.split(';') || [];
+	let ret = '';
+	strList.forEach(item => {
+		if (item.indexOf('filename') >= 0) {
+			const itemStr = item.split('=');
+			ret = itemStr[1];
+		}
+	});
+	if (!ret) {
+		return Math.random().toString(36).slice(2);
+	}
+	return decodeURIComponent(ret);
 }
