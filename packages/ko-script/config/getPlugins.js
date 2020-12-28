@@ -22,14 +22,21 @@ const getRulesHappy = require('./getRulesHappy');
 const getUserConf = require('./getUserConf');
 
 module.exports = (entry, program) => {
+  const { micro, enableDll } = program;
   const userDefinedWebpackConf = getUserConf().webpack;
   const userDefinedPlugins = userDefinedWebpackConf.plugins || [];
+  const miniCssExtractPluginConf = micro
+    ? {
+        filename: 'css/[name].css',
+      }
+    : {
+        filename: 'css/[name].[hash:6].css',
+        chunkFilename: 'css/[id].[hash:6].css',
+      };
   let plugins = [
+    // TODO: use vue loader when offical bug was resolved
     // new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash:6].css',
-      chunkFilename: 'css/[id].[hash:6].css',
-    }),
+    new MiniCssExtractPlugin(miniCssExtractPluginConf),
     new FilterWarningsPlugin({
       exclude: /Conflicting order between:/,
     }),
@@ -50,8 +57,6 @@ module.exports = (entry, program) => {
       })
     );
   }
-  const { micro, enableDll } = program;
-  // debugger;
   // if (!micro || enableDll) {
   //   //引入 dll 文件
   //   Array.prototype.push.apply(plugins, getDllPlugins());

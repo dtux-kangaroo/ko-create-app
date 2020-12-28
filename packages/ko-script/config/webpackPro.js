@@ -15,17 +15,20 @@ const webpack = require('webpack');
 const getWebpackBase = require('./webpackBase');
 
 module.exports = function getWebpackPro(program) {
+  const { micro, enableDll } = program;
   const baseConfig = getWebpackBase(program);
   baseConfig.optimization = {
-    moduleIds: 'deterministic',
+    moduleIds: 'hashed',
     minimizer: [new CssMinimizerPlugin()],
   };
-  if (!program.micro) {
+  if (!micro && enableDll) {
     baseConfig.plugins.push(
-      new CopyWebpackPlugin([
-        { from: paths.appDll, to: paths.appDist + '/dll' },
-      ])
+      new CopyWebpackPlugin({
+        patterns: [{ from: paths.appDll, to: paths.appDist + '/dll' }],
+      })
     );
+  }
+  if (!micro) {
     baseConfig.plugins.push(
       new webpack.optimize.SplitChunksPlugin({
         // chunks: "initial"，"async"和"all"分别是：初始块，按需块或所有块；
