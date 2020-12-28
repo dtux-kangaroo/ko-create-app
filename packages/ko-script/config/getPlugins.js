@@ -21,7 +21,7 @@ const webpack = require('webpack');
 const getRulesHappy = require('./getRulesHappy');
 const getUserConf = require('./getUserConf');
 
-module.exports = (entry, enableMicro) => {
+module.exports = (entry, program) => {
   const userDefinedWebpackConf = getUserConf().webpack;
   const userDefinedPlugins = userDefinedWebpackConf.plugins || [];
   let plugins = [
@@ -50,12 +50,14 @@ module.exports = (entry, enableMicro) => {
       })
     );
   }
-  if (!enableMicro) {
-    //引入 dll 文件
-    Array.prototype.push.apply(plugins, getDllPlugins());
-  }
+  const { micro, enableDll } = program;
+  // debugger;
+  // if (!micro || enableDll) {
+  //   //引入 dll 文件
+  //   Array.prototype.push.apply(plugins, getDllPlugins());
+  // }
   // 增加 html 输出，支持多页面应用
-  Array.prototype.push.apply(plugins, getHtmlPlugins(entry, enableMicro));
+  Array.prototype.push.apply(plugins, getHtmlPlugins(entry, micro));
   //加载happypackplugin
   Array.prototype.push.apply(plugins, getRulesHappy());
   return plugins;

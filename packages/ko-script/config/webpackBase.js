@@ -75,28 +75,45 @@ module.exports = function getWebpackBase(program) {
     ]),
   ];
 
+  const output = {
+    path: paths.appDist,
+    filename: enableMicro ? 'js/[name].js' : 'js/[name].[hash:6].js',
+    publicPath: '/',
+  };
+
+  if (enableMicro) {
+    output.library = '[name]';
+    output.libraryTarget = 'umd';
+    output.globalObject = `(() => {
+      if (typeof self !== 'undefined') {
+          return self;
+      } else if (typeof window !== 'undefined') {
+          return window;
+      } else if (typeof global !== 'undefined') {
+          return global;
+      } else {
+          return Function('return this')();
+      }
+    })()`;
+  }
+
   const webpackConfig = {
     mode: process.env.NODE_ENV === ENV_DEV ? ENV_DEV : ENV_PROD,
     context: paths.appDirectory,
-    output: {
-      path: paths.appDist,
-      filename: enableMicro ? 'js/[name].js' : 'js/[name].[contenthash:6].js',
-      publicPath: '/',
-      libraryTarget: enableMicro ? 'system' : 'umd',
-    },
+    output: output,
     resolve: {
       modules: [paths.appModules, 'node_modules'],
       extensions: [
         '.js',
         '.jsx',
-        '.scss',
+        '.ts',
+        '.tsx',
+        '.vue',
         '.css',
+        '.scss',
         '.less',
         '.json',
         '.html',
-        '.vue',
-        '.ts',
-        '.tsx',
       ],
       alias: {
         vue$: 'vue/dist/vue.esm.js',
@@ -118,8 +135,8 @@ module.exports = function getWebpackBase(program) {
       hints: false, // 关闭性能提示
     },
     plugins: program.ts
-      ? getPlugins(result.entry, enableMicro).concat(tsPlugin)
-      : getPlugins(result.entry, enableMicro),
+      ? getPlugins(result.entry, program).concat(tsPlugin)
+      : getPlugins(result.entry, program),
     optimization: {},
     node: false,
   };

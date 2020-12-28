@@ -25,6 +25,7 @@ module.exports = args => {
       ignored: /node_modules/,
       aggregateTimeout: 600,
     },
+    writeToDisk: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',

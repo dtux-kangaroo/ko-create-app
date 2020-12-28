@@ -28,9 +28,6 @@ module.exports = function getWebpackDev(program) {
   // 配置合并 开发环境下 publicPath 指定为 / 与 webpack server 一致
   return merge(baseConfig, {
     devtool: 'cheap-module-source-map',
-    output: {
-      publicPath: '/',
-    },
     plugins,
   });
 };

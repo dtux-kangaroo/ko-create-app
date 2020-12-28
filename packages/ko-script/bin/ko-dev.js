@@ -12,6 +12,7 @@ program
   .option('--host <host>', '服务主机名')
   .option('-t, --ts', '支持typescript')
   .option('-m, --micro', '开启微前端支持')
+  .option('--enable-dll', '开启dll支持')
   .option('-a,--analyzer', '开启构建分析')
   .parse(process.argv);
 attachToEnv(program); //当前终端命令假如环境变量，避免权限无法执行问题；

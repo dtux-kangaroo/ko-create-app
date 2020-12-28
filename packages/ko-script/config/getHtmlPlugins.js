@@ -19,9 +19,9 @@ module.exports = function getHtmlPlugins(entries, enableMicro) {
   }
   const config = getConfJsPath();
   let scripts = {};
-  if (!enableMicro) {
-    scripts = getDllJsPath();
-  }
+  // if (!enableMicro) {
+  //   scripts = getDllJsPath();
+  // }
   return [
     new HtmlWebpackPlugin({
       template: paths.appHtml,
@@ -29,7 +29,7 @@ module.exports = function getHtmlPlugins(entries, enableMicro) {
       minify: true,
       title: '',
       assets: {
-        scripts,
+        // scripts,
         config,
       },
       chunksSortMode: 'none',
