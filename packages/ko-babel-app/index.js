@@ -107,16 +107,26 @@ module.exports = function (plugins = [], targets) {
         // explicitly resolving to match the provided helper functions.
         // https://github.com/babel/babel/issues/10261
         version: require('@babel/runtime/package.json').version,
-        //Using absolute paths is not desirable if files are compiled for use at a later time, 
+        //Using absolute paths is not desirable if files are compiled for use at a later time,
         //but in contexts where a file is compiled and then immediately consumed, they can be quite helpful.
         absoluteRuntime: absoluteRuntime,
       },
     ],
     '@babel/plugin-proposal-json-strings',
+    //TODO: remove babel-plugin-import because offcial sugguest not use this plugin
     [
       'babel-plugin-import',
-      { libraryName: 'antd', libraryDirectory: 'lib' },
-      'ant',
+      { libraryName: 'antd', libraryDirectory: 'lib', style: true },
+      'antd',
+    ],
+    [
+      'babel-plugin-import',
+      {
+        libraryName: '@ant-design/icons',
+        libraryDirectory: 'es/icons',
+        camel2DashComponentName: false,
+      },
+      '@ant-design/icons',
     ],
     [
       'babel-plugin-import',

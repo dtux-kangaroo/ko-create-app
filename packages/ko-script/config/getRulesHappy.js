@@ -5,7 +5,7 @@ const getUserConf = require('./getUserConf');
 
 module.exports = () => {
   const { babel = {} } = getUserConf();
-  const babelConf = require('@kodesign/ko-babel-app')(babel.plugins, babel.targets);
+  const babelConf = require('ko-babel-app')(babel.plugins, babel.targets);
   let happyPlugins = [];
   happyPlugins.push(
     createHappyPlugin('happy-babel-js', [
