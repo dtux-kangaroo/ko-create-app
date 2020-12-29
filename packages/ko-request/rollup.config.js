@@ -9,7 +9,7 @@ import ts from 'rollup-plugin-typescript2';
 export default {
 	input: path.join(__dirname, `src/index.ts`),
 	output: {
-		name:'ko-request',
+		name:'KoRequest',
 		file: 'lib/index.js',
 		format: 'umd'
 	},
