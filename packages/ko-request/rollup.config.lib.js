@@ -8,7 +8,7 @@ import ts from 'rollup-plugin-typescript2';
 
 const input = ['axios', 'fetch']
 const output = input.map(item => {
-	return { 
+	return {
 		file: `lib/${item}/index.js`,
 		format: 'es'
 	}
