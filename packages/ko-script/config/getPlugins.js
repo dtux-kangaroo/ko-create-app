@@ -62,7 +62,7 @@ module.exports = (entry, program) => {
     Array.prototype.push.apply(plugins, getDllPlugins());
   }
   // 增加 html 输出，支持多页面应用
-  Array.prototype.push.apply(plugins, getHtmlPlugins(entry, micro));
+  Array.prototype.push.apply(plugins, getHtmlPlugins(entry, program));
   //加载happypackplugin
   Array.prototype.push.apply(plugins, getRulesHappy());
   return plugins;
