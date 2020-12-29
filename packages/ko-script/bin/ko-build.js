@@ -13,6 +13,7 @@ program
   .option('-t,--ts', '支持typescript')
   .option('-e, --env [env]', '定义打包环境')
   .option('-m, --micro', '开启微前端支持')
+  .option('--enable-dll', '开启dll支持')
   .parse(process.argv);
 attachToEnv(program);
 try {

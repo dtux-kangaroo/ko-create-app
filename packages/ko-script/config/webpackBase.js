@@ -44,7 +44,7 @@ const ENV_PROD = 'production';
 const ENV_DEV = 'development';
 
 module.exports = function getWebpackBase(program) {
-  const enableMicro = program.micro;
+  const { micro } = program;
   const result = getEntry(program);
   const tsRule = [
     {
@@ -77,11 +77,11 @@ module.exports = function getWebpackBase(program) {
 
   const output = {
     path: paths.appDist,
-    filename: enableMicro ? 'js/[name].js' : 'js/[name].[hash:6].js',
+    filename: micro ? 'js/[name].js' : 'js/[name].[hash:6].js',
     publicPath: '/',
   };
 
-  if (enableMicro) {
+  if (micro) {
     output.library = '[name]';
     output.libraryTarget = 'umd';
     output.globalObject = `(() => {
