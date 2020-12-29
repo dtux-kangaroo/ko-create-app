@@ -64,19 +64,18 @@
 
 ### 替换
 
-TODO
-| 包名称  | 替换原因  |
-|---|---|
-|  optimize-css-assets-webpack-plugin |  css-minimizer-webpack-plugin |
-|  node-sass  | sass  |
+| 包名称  | 替换  | 替换原因 |
+|---|---|---|
+|  optimize-css-assets-webpack-plugin |  css-minimizer-webpack-plugin | 官方建议 |
+|  node-sass  | sass  | 官方建议 |
 
 ### 新增功能
 
-### dll相关配置修改，增添了disbale dll相关可选项
+### dll相关配置修改，现在在dev和build阶段dll为默认不引入， 增添了--enable-dll相关可选项，可以通过该选项开启dll支持
 
-### html-webpack-plugin现在只支持生成单一html，后续会添加相关拱卒
+### html-webpack-plugin现在只支持生成单一html，后续考虑添加多出口文件
 
-#### lint支持
+#### lint支持，支持eslint和prettier结合来进行相应的代码格式化,
 
-#### microfrontends相关配置支持
+#### microfrontends相关配置支持，可以通过-m, --micro相关可选项开启支持
 
