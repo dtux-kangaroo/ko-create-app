@@ -44,7 +44,7 @@
  urllib                                ^2.34.2  →   ^2.36.1     
  vue-loader                            ^15.8.3  →   ^15.9.5     
  vue-template-compiler                 ^2.6.11  →   ^2.6.12     
- webpack                               ^4.41.5  →   ^5.10.3     
+ webpack                               ^4.41.5  →   ^4.44.2     
  webpack-bundle-analyzer                ^3.6.0  →    ^4.2.0     
  webpack-cli                           ^3.3.10  →    ^4.2.0     
  webpack-dev-server                    ^3.10.1  →   ^3.11.0     
