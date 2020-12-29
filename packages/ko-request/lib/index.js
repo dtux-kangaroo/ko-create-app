@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('axios'), require('qs'), require('whatwg-fetch')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'axios', 'qs', 'whatwg-fetch'], factory) :
-	(global = global || self, factory(global['ko-request'] = {}, global._axios, global.qs));
+	(global = global || self, factory(global.KoRequest = {}, global._axios, global.qs));
 }(this, (function (exports, _axios, qs) { 'use strict';
 
 	_axios = _axios && Object.prototype.hasOwnProperty.call(_axios, 'default') ? _axios['default'] : _axios;
