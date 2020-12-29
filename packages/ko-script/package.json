@@ -17,7 +17,7 @@
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dtux-kangaroo/ko-resouce/tree/master/react-resource/blocks/about"
+    "url": "https://github.com/dtux-kangaroo/ko-create-app"
   },
   "bin": {
     "ko": "./bin/ko.js"
@@ -44,7 +44,7 @@
     "script"
   ],
   "bugs": {
-    "url": "https://github.com/dtux-kangaroo/ko-script/issues"
+    "url": "https://github.com/dtux-kangaroo/ko-create-app/issues"
   },
   "dependencies": {
     "assets-webpack-plugin": "^7.0.0",
