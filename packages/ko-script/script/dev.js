@@ -27,6 +27,7 @@ module.exports = async function(program) {
     webpackSer = deepmerge(webpackSer, webpackDev.devServer);
   }
   webpackSer.proxy = proxy.length ? proxy : {};
+  program.micro && (webpackSer.writeToDisk = true);
   const devServer = new WebpackDevServer(compiler, webpackSer);
 
   compiler.hooks.done.tap('done', stats => {
