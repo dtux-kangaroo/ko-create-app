@@ -1,7 +1,7 @@
 {
   "name": "ko-script",
   "author": "kodesign",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "description": "基于webpack打包cli工具",
   "main": "index.js",
   "module": "",
