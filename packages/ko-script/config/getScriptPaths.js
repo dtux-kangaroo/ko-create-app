@@ -33,6 +33,9 @@ module.exports = {
     }
     return conf;
   },
+  getAssetsConfPath: (env) => {
+    return `config/conf.${env}.js`
+  },
   getDllJsPath: () => {
     let assetObj = require(paths.appAsset);
     let { keys } = Object;

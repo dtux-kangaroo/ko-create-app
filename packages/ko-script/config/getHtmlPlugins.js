@@ -8,12 +8,13 @@
  * @LastEditTime: 2019-01-28 17:17:55
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const paths = require('./defaultPaths');
-const { getConfJsPath, getDllJsPath } = require('./getScriptPaths');
+const { getConfJsPath, getAssetsConfPath, getDllJsPath } = require('./getScriptPaths');
 const verifyHtml = require('../util/verifyHtml');
 
 module.exports = function getHtmlPlugins(entries, program) {
-  const { micro, enableDll } = program;
+  const { micro, enableDll, env } = program;
   //验证模板文件
   if (!micro) {
     verifyHtml(paths.appHtml);
@@ -35,6 +36,10 @@ module.exports = function getHtmlPlugins(entries, program) {
       },
       chunksSortMode: 'none',
     }),
+    new HtmlWebpackTagsPlugin({
+      tags: [getAssetsConfPath(env)],
+      append: false
+    })
   ];
   //TODO: support multi HTML files in the future;
   if (typeof entries === 'string' || Array.isArray(entries)) {
