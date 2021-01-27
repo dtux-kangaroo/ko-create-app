@@ -117,11 +117,11 @@ import "regenerator-runtime/runtime"
 
 ### Roadmap
 
-[] webpack升级到v5版本，以及相关周边适配升级
-[] 配置规则优化，结合webpack5最新特性对开发和打包进行性能优化
-[] 补充文档细节，补充相关使用示例
-[] 补充测试
-[] 探究ko-babel-app独立于项目外的优缺点
+- [ ] webpack升级到v5版本，以及相关周边适配升级
+- [ ] 配置规则优化，结合webpack5最新特性对开发和打包进行性能优化
+- [ ] 补充文档细节，补充相关使用示例
+- [ ] 补充测试
+- [ ] 探究ko-babel-app独立于项目外的优缺点
 
 ### Tips
 > v3版本以上仅支持babel-loader8;
