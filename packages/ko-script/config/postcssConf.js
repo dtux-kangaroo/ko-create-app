@@ -11,7 +11,7 @@ const autoprefixer = require('autoprefixer');
 
 //设置 postcss配置
 module.exports = {
-  plugins: [
-    autoprefixer()
-  ]
+  postcssOptions: {
+    plugins: [autoprefixer()],
+  },
 };

@@ -1,6 +1,6 @@
 {
-  "name": "@kodesign/ko-babel-app",
-  "version": "8.0.1",
+  "name": "ko-babel-app",
+  "version": "8.0.3",
   "description": "ko babel presets",
   "main": "index.js",
   "module": "",
@@ -27,9 +27,9 @@
     "url": "https://github.com/dtux-kangaroo/ko-resouce/tree/master/react-resource/blocks/about"
   },
   "dependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "7.12.1",
-    "@babel/plugin-proposal-decorators": "7.12.1",
+    "@babel/plugin-proposal-decorators": "7.12.12",
     "@babel/plugin-proposal-do-expressions": "7.12.1",
     "@babel/plugin-proposal-export-default-from": "7.12.1",
     "@babel/plugin-proposal-export-namespace-from": "7.12.1",
@@ -38,9 +38,9 @@
     "@babel/plugin-proposal-json-strings": "7.12.1",
     "@babel/plugin-proposal-logical-assignment-operators": "7.12.1",
     "@babel/plugin-proposal-nullish-coalescing-operator": "7.12.1",
-    "@babel/plugin-proposal-numeric-separator": "7.12.1",
+    "@babel/plugin-proposal-numeric-separator": "7.12.7",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/plugin-proposal-optional-chaining": "7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "7.12.7",
     "@babel/plugin-proposal-pipeline-operator": "7.12.1",
     "@babel/plugin-proposal-throw-expressions": "7.12.1",
     "@babel/plugin-syntax-dynamic-import": "7.8.3",
@@ -48,12 +48,12 @@
     "@babel/plugin-transform-destructuring": "^7.12.1",
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "@babel/plugin-transform-regenerator": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "7.12.1",
-    "@babel/preset-react": "7.12.1",
-    "@babel/preset-typescript": "^7.12.1",
-    "@babel/runtime": "^7.12.1",
-    "babel-plugin-import": "^1.13.1"
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "7.12.11",
+    "@babel/preset-react": "7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "babel-plugin-import": "^1.13.3"
   },
   "gitHead": "b62d264650b9bb52d3c3316cfb69c45ed71d34a6"
 }

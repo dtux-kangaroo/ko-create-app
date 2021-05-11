@@ -14,8 +14,8 @@ const paths = require('./defaultPaths');
 const pkg = require(paths.appPkg);
 const { formatBundle } = require('../util');
 const dependencies = Object.keys(pkg.dependencies) || [];
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BABEL_LOADER = require.resolve('babel-loader');
 const deepAssign = require('deep-assign');
@@ -31,7 +31,7 @@ module.exports = function(s) {
   const userConfig = getUserConf();
   const { dll = [], babel = {} } = userConfig;
   let splicModules = dll.length ? dll : dependencies;
-  const babelConf = require('@kodesign/ko-babel-app')(babel.plugins, babel.targets);
+  const babelConf = require('ko-babel-app')(babel.plugins, babel.targets);
   return {
     mode: 'production',
     entry: formatBundle(splicModules, s),
@@ -56,14 +56,7 @@ module.exports = function(s) {
       alias: { vue: 'vue/dist/vue.js' },
     },
     optimization: {
-      minimizer: [
-        new TerserPlugin({
-          cache: true,
-          parallel: true,
-          sourceMap: false,
-        }),
-        new OptimizeCSSAssetsPlugin({}),
-      ],
+      minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
     },
     plugins: [
       new webpack.optimize.ModuleConcatenationPlugin(),
@@ -78,7 +71,10 @@ module.exports = function(s) {
         filename: 'bundle.json',
         path: paths.appDll,
       }),
-      new CleanWebpackPlugin(cleanPath, cleanOpt),
+      new CleanWebpackPlugin({
+        verbose: false,
+        dry: false,
+      }),
     ],
     performance: {
       //打包性能配置s

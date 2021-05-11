@@ -23,6 +23,8 @@ function getUserConf() {
       webpack: {},
       move: {},
       babel: {},
+      prettier: '',
+      eslint: '',
     };
   }
 }
@@ -43,6 +45,8 @@ module.exports = () => {
     move = {},
     dll = [],
     babel = {},
+    prettier,
+    eslint,
   } = userConf;
   return {
     proxy,
@@ -51,5 +55,7 @@ module.exports = () => {
     move,
     dll,
     babel,
+    prettier,
+    eslint,
   };
 };
