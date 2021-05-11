@@ -37,7 +37,9 @@ $ yarn add ko-script --dev
 
 10.ko create  创建页面或者组件目录及文件
 
-11. ko [xx] -h 查看相关命令参数使用
+11.ko lint 项目代码格式化
+
+12.ko [xx] -h 查看相关命令参数使用
 ```
 
 ### Use advanced
@@ -69,9 +71,10 @@ module.exports = (context) => {
 }
 ```
 
-> @babel/polyfill 垫片使用
+> [polyfill](https://babeljs.io/docs/en/babel-polyfill)
 ```text
-1.import "@babel/polyfill" //当使用es6新实例，需引入此垫片
+import "core-js/stable" 
+import "regenerator-runtime/runtime"
 ```
 
 > Global Configuration
@@ -107,6 +110,18 @@ module.exports = (context) => {
   ├── package.json           // package.json
   └── README.md              // 项目说明
 ```
+
+### Links
+
+- [Change Log](CHANGELOG.md)
+
+### Roadmap
+
+- [ ] webpack升级到v5版本，以及相关周边适配升级
+- [ ] 配置规则优化，结合webpack5最新特性对开发和打包进行性能优化
+- [ ] 补充文档细节，补充相关使用示例
+- [ ] 补充测试
+- [ ] 探究ko-babel-app独立于项目外的优缺点
 
 ### Tips
 > v3版本以上仅支持babel-loader8;
