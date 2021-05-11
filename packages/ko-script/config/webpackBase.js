@@ -90,7 +90,7 @@ const tsRule=[
     ),
     resolve: {
       modules: [paths.appModules, 'node_modules'],
-      extensions: ['.js', '.jsx', '.scss', '.css', '.less','.json','.html','.vue','.ts','.tsx',],
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css', '.less', '.json', '.html', '.vue'],
       alias:{
         'vue$':'vue/dist/vue.esm.js'
       },
