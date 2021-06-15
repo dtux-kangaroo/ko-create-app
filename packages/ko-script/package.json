@@ -1,5 +1,5 @@
 {
-  "name": "@kodesign/ko-script",
+  "name": "ko-script",
   "author": "kodesign",
   "version": "4.25.10",
   "description": "基于webpack打包cli工具",
