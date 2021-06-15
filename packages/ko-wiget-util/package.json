@@ -1,6 +1,6 @@
 {
-  "name": "@kodesign/kov-util",
-  "version": "1.6.6",
+  "name": "ko-wiget-util",
+  "version": "1.6.7",
   "description": "袋鼠基础图表-工具库",
   "scripts": {
     "build": "rollup -c",
