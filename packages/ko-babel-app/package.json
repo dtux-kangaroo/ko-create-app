@@ -1,6 +1,6 @@
 {
   "name": "ko-babel-app",
-  "version": "8.0.16",
+  "version": "8.0.17",
   "description": "ko babel presets",
   "main": "index.js",
   "keywords": [

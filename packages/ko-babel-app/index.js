@@ -1,24 +1,10 @@
-/*
- * @Description: 设置babel插件
- * @version: 1.0.0
- * @Company: 袋鼠云
- * @Author: Charles
- * @Date: 2018-12-11 14:57:12
- * @LastEditors: Charles
- * @LastEditTime: 2020-03-03 18:19:43
- */
-const resolvePlugin = require('./util/index').resolvePlugin;
 const path = require('path');
+const { resolvePlugin } = require('./util');
 const absoluteRuntime = path.dirname(
   require.resolve('@babel/runtime/package.json')
 );
 
-/**
- * @description 支持自定义plugins和targets
- * @LastEditors xbrave
- * @param plugins
- * @param targets
- */
+//TODO: update with new babel config assumptions: https://babeljs.io/docs/en/assumptions
 module.exports = function (plugins = [], targets) {
   const basePlugins = [
     // Stage 0
@@ -94,6 +80,12 @@ module.exports = function (plugins = [], targets) {
         loose: true,
       },
     ],
+    [
+      '@babel/plugin-proposal-private-methods',
+      {
+        loose: true,
+      },
+    ],
     // Polyfills the runtime needed for async/await, generators, and friends
     // https://babeljs.io/docs/en/babel-plugin-transform-runtime
     [
@@ -107,7 +99,7 @@ module.exports = function (plugins = [], targets) {
         // explicitly resolving to match the provided helper functions.
         // https://github.com/babel/babel/issues/10261
         version: require('@babel/runtime/package.json').version,
-        //Using absolute paths is not desirable if files are compiled for use at a later time, 
+        //Using absolute paths is not desirable if files are compiled for use at a later time,
         //but in contexts where a file is compiled and then immediately consumed, they can be quite helpful.
         absoluteRuntime: absoluteRuntime,
       },
