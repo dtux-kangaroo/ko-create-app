@@ -9,8 +9,8 @@
  */
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpackMerge = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const paths=require('./defaultPaths')
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const paths=require('./defaultPaths')
 const webpack=require('webpack');
 const getWebpackBase = require('./webpackBase');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -43,9 +43,9 @@ module.exports = function getWebpackPro(program) {
     ]
   };
   baseConfig.plugins.push(
-    new CopyWebpackPlugin([
-      { from: paths.appDll,to:paths.appDist+'/dll'},
-    ]),
+    // new CopyWebpackPlugin([
+    //   { from: paths.appDll,to:paths.appDist+'/dll'},
+    // ]),
     new webpack.optimize.SplitChunksPlugin({
       // chunks: "initial"，"async"和"all"分别是：初始块，按需块或所有块；
       chunks: 'async',
