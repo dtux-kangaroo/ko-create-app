@@ -34,12 +34,13 @@ module.exports={
        return conf;
     },
     getDllJsPath:()=>{
-        let assetObj = require(paths.appAsset);
-        let {keys} = Object;
-        let script='';
-        for (let key of keys(assetObj)) {
-            script+=`<script src="${publicPath}dll/${assetObj[key].js}"></script>\n`;
-        }
-        return script;
+        // let assetObj = require(paths.appAsset);
+        // let {keys} = Object;
+        // let script='';
+        // for (let key of keys(assetObj)) {
+        //     script+=`<script src="${publicPath}dll/${assetObj[key].js}"></script>\n`;
+        // }
+        // return script;
+        return '';
     }
 }
