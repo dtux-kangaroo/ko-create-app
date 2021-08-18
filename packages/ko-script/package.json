@@ -1,7 +1,7 @@
 {
   "name": "ko-script",
-  "author": "kodesign",
-  "version": "4.25.12",
+  "author": "dtstack",
+  "version": "4.25.12-schedule",
   "description": "基于webpack打包cli工具",
   "main": "index.js",
   "module": "",

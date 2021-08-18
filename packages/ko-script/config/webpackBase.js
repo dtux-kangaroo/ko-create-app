@@ -120,7 +120,7 @@ const tsRule=[
   };
    
   const finalWebpackConfig = webpackMerge({
-    customizeArray: pluginsUnique(['HtmlWebpackPlugin'])
+    customizeArray: pluginsUnique([])
   })(webpackConfig, result.webpack);
   finalWebpackConfig.output.path=isAbsolute(finalWebpackConfig.output.path);
   finalWebpackConfig.entry=processEntry(finalWebpackConfig.entry);
